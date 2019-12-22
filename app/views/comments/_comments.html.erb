@@ -1,0 +1,35 @@
+<div class="container">
+  <% @blog.comments.each do |comment|%>
+  <div class="row">
+    <div class="col-md-3">
+      <strong>Commenter:</strong>
+      <%= comment.commenter %>
+    </div>
+     
+    <div class="col-md-3">
+      <strong>Comment:</strong>
+      <%= comment.body %>
+    </div>
+    <div class="col-md-3">
+      <%= link_to 'Edit Comment', edit_blog_comment_path(comment.blog, comment) %>
+    </div>
+    <div class="col-md-3">
+      <%= link_to 'Delete Comment', [comment.blog, comment],
+                   method: :delete,
+                   data: { confirm: 'Are you sure?' } %>
+    </div>    
+  </div>
+
+  <h2> Reply on comment</h2>
+  <% @replies= Reply.where(:comment_id=> comment.id)
+  %>
+
+  <%@replies.each do |reply|%>
+    <p>
+    <strong>Reply:</strong>
+    <%=reply.body%></p>
+  <%end%>
+  <%= render 'replies/form', :comment=>comment %>
+
+  <% end %>
+</div>

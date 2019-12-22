@@ -1,0 +1,15 @@
+<%= form_for :reply, url: "/blogs/#{@blog.id}/comments/#{comment.id}/replies" do |f| %>
+   <%= f.hidden_field :comment_id,  :value=> comment.id %>
+  <div class="row">
+   	<div class="col-md-6">
+   		<div class="col-md-6">
+		   <%= f.text_field :body, class: "form-control" %>
+		  </div>
+		  <div class="col-md-6">
+			   <%= f.submit "Reply", class: "btn btn-success" %>
+			</div>
+		</div>
+  </div>
+<% end %>
+
+

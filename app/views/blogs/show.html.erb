@@ -1,0 +1,26 @@
+<div class="container">
+	<h2 style="text-align: center;">Blog Details</h2><br><br>
+	<div class="row">
+		<div class="col-md-6">
+		  <strong><%= @blog.title %></strong>
+		</div>
+		<div class="col-md-6">
+		  <%= image_tag @blog.image, :height=>"70", :width=>"70" %>
+		</div>
+	</div>
+	<p><%= @blog.likes.count %> <%= (@blog.likes.count) == 1 ? 'Like' : 'Likes'%></p>
+	<% pre_like = @blog.likes.find { |like| like.user_id == current_user.id} %>
+	<% if pre_like %>
+	  <%= button_to 'Unlike', blog_like_path(@blog, pre_like), method: :delete %>
+	<% else %>
+	  <%= button_to 'Like', blog_likes_path(@blog), method: :post %>
+	<% end %>
+	<h2>Comments</h2>
+	<%= render 'comments/comments' %>
+	 
+	<h2>Add a comment:</h2>
+	<%= render 'comments/form' %>
+	 
+	<%#= link_to 'Edit', edit_blog_path(@blog), class: "btn btn-success" %> 
+	<%= link_to 'Back', blogs_path, class: "btn btn-primary" %>
+</div>
